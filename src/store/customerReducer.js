@@ -1,4 +1,5 @@
 const ADD_CUSTOMER = 'ADD_CUSTOMER'
+const ADD_MANY_CUSTOMER = 'ADD_MANY_CUSTOMER'
 const REMOVE_CUSTOMER = 'REMOVE_CUSTOMER'
 
 const defaultState = {
@@ -7,6 +8,8 @@ const defaultState = {
 
 export const customerReducer = (state = defaultState, action) => {
     switch (action.type){
+        case ADD_MANY_CUSTOMER:
+            return {...state,customers: [...state.customers,...action.payload]}
         case ADD_CUSTOMER:
             return {...state,customers: [...state.customers,action.payload]}
         case REMOVE_CUSTOMER:
@@ -18,6 +21,11 @@ export const customerReducer = (state = defaultState, action) => {
 export const addCustomerAction = (customer) => {
     return{
         type: 'ADD_CUSTOMER',payload:customer
+    }
+}
+export const addManyCustomerAction = (users) => {
+    return{
+        type: 'ADD_MANY_CUSTOMER',payload:users
     }
 }
 export  const removeCustomerAction = (customer) => {
